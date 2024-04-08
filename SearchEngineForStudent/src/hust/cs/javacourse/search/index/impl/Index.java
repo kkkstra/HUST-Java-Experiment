@@ -1,7 +1,7 @@
 package hust.cs.javacourse.search.index.impl;
 
+import com.google.gson.Gson;
 import hust.cs.javacourse.search.index.*;
-import hust.cs.javacourse.search.util.FileUtil;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -55,7 +55,17 @@ public class Index extends AbstractIndex {
      */
     @Override
     public void load(File file) {
-        
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] bytes = new byte[(int) file.length()];
+            fileInputStream.read(bytes);
+            String json = new String(bytes);
+            Gson gson = new Gson();
+            Index index = gson.fromJson(json, Index.class);
+            fileInputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -66,7 +76,15 @@ public class Index extends AbstractIndex {
      */
     @Override
     public void save(File file) {
-
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            Gson gson = new Gson();
+            String json = gson.toJson(this);
+            fileOutputStream.write(json.getBytes());
+            fileOutputStream.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

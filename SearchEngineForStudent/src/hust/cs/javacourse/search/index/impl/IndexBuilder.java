@@ -1,9 +1,18 @@
 package hust.cs.javacourse.search.index.impl;
 
+import com.google.gson.Gson;
+import hust.cs.javacourse.search.index.AbstractDocumentBuilder;
 import hust.cs.javacourse.search.index.AbstractIndex;
 import hust.cs.javacourse.search.index.AbstractIndexBuilder;
 
+import java.io.File;
+
 public class IndexBuilder extends AbstractIndexBuilder {
+
+    public IndexBuilder(AbstractDocumentBuilder docBuilder) {
+        super(docBuilder);
+    }
+
     /**
      * <pre>
      * 构建指定目录下的所有文本文件的倒排索引.
@@ -14,6 +23,6 @@ public class IndexBuilder extends AbstractIndexBuilder {
      */
     @Override
     public AbstractIndex buildIndex(String rootDirectory) {
-
+        return null;
     }
 }
